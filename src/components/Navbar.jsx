@@ -103,6 +103,10 @@ const Navbar = () => {
   // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Reset active dropdown when toggling mobile menu
+    if (!isMobileMenuOpen) {
+      setActiveDropdown(null);
+    }
   };
 
   // Toggle dropdown for mobile
@@ -196,7 +200,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <button className="mobile-toggle animate-item" onClick={toggleMobileMenu}>
+          <button className="mobile-toggle animate-item" onClick={toggleMobileMenu} aria-label="Toggle Navigation">
             <span className={`menu-icon ${isMobileMenuOpen ? 'open' : ''}`}></span>
           </button>
         </div>
@@ -209,6 +213,7 @@ const Navbar = () => {
             <button 
               className={`mobile-dropdown-toggle ${activeDropdown === index ? 'active' : ''}`}
               onClick={() => toggleDropdown(index)}
+              aria-expanded={activeDropdown === index}
             >
               {item.title}
               <i className={`mobile-dropdown-icon ${activeDropdown === index ? 'active' : ''}`}></i>
