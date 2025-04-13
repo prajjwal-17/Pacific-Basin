@@ -119,7 +119,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`${scrolled ? 'scrolled' : ''} ${loaded ? 'loaded' : ''}`}>
+    <header className={`fixed-header ${scrolled ? 'scrolled' : ''} ${loaded ? 'loaded' : ''}`}>
       {/* Top bar */}
       <div className="top-bar">
         <div className="container">
