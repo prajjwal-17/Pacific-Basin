@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Navbar.css';
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -124,13 +126,13 @@ const Navbar = () => {
 
   return (
     <header className={`fixed-header ${scrolled ? 'scrolled' : ''} ${loaded ? 'loaded' : ''}`}>
-      {/* Top bar */}
-      <div className="top-bar">
+      {/* Top bar with integrated elements that will merge with navbar */}
+      <div className={`top-bar ${scrolled ? 'top-bar-collapsed' : ''}`}>
         <div className="container">
           <div className="contacts-language">
-            <a href="#" className="top-link">CONTACTS</a>
+            <a href="#" className="top-link top-link-animate">CONTACTS</a>
             <div className="language-selector">
-              <a href="#" className="top-link language">EN</a>
+              <a href="#" className="top-link language top-link-animate">EN</a>
               <div className="language-dropdown">
                 <a href="#" className="language-option">中文</a>
                 <a href="#" className="language-option">日本語</a>
@@ -138,8 +140,8 @@ const Navbar = () => {
             </div>
           </div>
           <div className="stock-info">
-            <span className="stock-price">1.630 HKD</span>
-            <span className="stock-change">+0.050 (3.16%)</span>
+            <span className="stock-price top-link-animate">1.630 HKD</span>
+            <span className="stock-change top-link-animate">+0.050 (3.16%)</span>
           </div>
         </div>
       </div>
@@ -150,10 +152,23 @@ const Navbar = () => {
           {/* Logo */}
           <a href="/" className="navbar-logo animate-item">
             <div className="logo-container">
-              <img src="/logo.png" alt="Pacific Basin" />
-              <span className="logo-pb">PB</span>
+              <img src="/logo.png" alt="Pacific Basin" className={scrolled ? 'logo-scrolled' : ''} />
+    
             </div>
           </a>
+
+          {/* Integrated top bar elements that appear when scrolled */}
+          <div className={`integrated-topbar ${scrolled ? 'show-integrated' : ''}`}>
+            <a href="#" className="integrated-link">CONTACTS</a>
+            <div className="integrated-language">
+              <span>EN</span>
+              <i className="integrated-dropdown-icon"></i>
+            </div>
+            <div className="integrated-stock">
+              <span>1.630 HKD</span>
+              <span className="integrated-change">+0.050</span>
+            </div>
+          </div>
 
           {/* Desktop menu */}
           <div className={`navbar-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
@@ -164,7 +179,7 @@ const Navbar = () => {
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className={`navbar-link ${activeDropdown === index ? 'active' : ''}`}>
+                <button className={`navbar-link ${activeDropdown === index ? 'active' : ''} ${scrolled ? 'navbar-link-scrolled' : ''}`}>
                   {item.title}
                   <i className="dropdown-icon"></i>
                 </button>
@@ -179,11 +194,17 @@ const Navbar = () => {
                         <div className="dropdown-links-container">
                           {splitLinks(item.links).map((columnLinks, colIndex) => (
                             <div key={colIndex} className="dropdown-column">
-                              {columnLinks.map((link, idx) => (
-                                <a key={idx} href="#" className="unified-dropdown-link">
-                                  {link}
-                                </a>
-                              ))}
+                               {columnLinks.map((link, idx) =>
+                                link === 'At a glance' ? (
+                                  <Link key={idx} to="/atglance" className="unified-dropdown-link">
+                                   {link}
+                                  </Link>
+                                ) : (
+                                    <a key={idx} href="#" className="unified-dropdown-link">
+                                 {link}
+                                  </a>
+                                     ))}
+
                             </div>
                           ))}
                         </div>
@@ -226,11 +247,17 @@ const Navbar = () => {
                     <div className="mobile-links-container">
                       {splitLinks(item.links).map((columnLinks, colIndex) => (
                         <div key={colIndex} className="mobile-column">
-                          {columnLinks.map((link, idx) => (
-                            <a key={idx} href="#" className="mobile-dropdown-link">
-                              {link}
-                            </a>
-                          ))}
+                              {columnLinks.map((link, idx) =>
+                           link === 'At a glance' ? (
+                          <Link key={idx} to="/atglance" className="mobile-dropdown-link" onClick={() => setIsMobileMenuOpen(false)}>
+                          {link}
+                          </Link>
+                          ) : (
+                         <a key={idx} href="#" className="mobile-dropdown-link">
+                          {link}
+                          </a>
+                         ))}
+
                         </div>
                       ))}
                     </div>
@@ -249,3 +276,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
