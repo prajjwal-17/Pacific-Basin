@@ -1,5 +1,5 @@
 .bottom-footer {
-  background-color: #e0f2f7;
+  background: linear-gradient(135deg, #1a2b3c, #2c3e50); 
   padding: 60px 20px 40px;
   font-family: Arial, sans-serif;
   border-top: 2px solid #81d4fa;
@@ -38,9 +38,9 @@
   transform: scale(1.05);
 }
 
-/* Subscribe box */
+/* Subscribe box - Updated */
 .bottom-footer .subscribe-box {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #102840; /* Deep navy blue */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,15 +51,14 @@
   max-width: 700px;
   width: 100%;
   gap: 20px;
-  border: 1px solid #b2ebf2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #1e3a5f; /* Slightly lighter border for definition */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
-
-/* Subscribe text */
+/* Subscribe text - Updated color */
 .bottom-footer .subscribe-text {
   font-size: 18px;
   font-weight: 600;
-  color: #004d40;
+  color: #e0f7fa; /* Soft teal for contrast */
   letter-spacing: 0.3px;
 }
 
@@ -77,10 +76,10 @@
   padding: 12px 18px;
   border-radius: 30px;
   border: 1px solid #81d4fa;
-  outline: none;
-  font-size: 15px;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  background-color: #0f1f33;
+  color: #e0f7fa;
 }
+
 
 .subscribe-input-group input:focus {
   border-color: #00acc1;
@@ -89,7 +88,7 @@
 
 .subscribe-input-group button {
   padding: 12px 24px;
-  background-color: #00acc1;
+  background-color: #0288d1;
   color: white;
   border: none;
   border-radius: 30px;
@@ -99,7 +98,9 @@
   transition: all 0.3s ease;
   white-space: nowrap;
 }
-
+.subscribe-input-group input::placeholder {
+  color: #b0bec5;
+}
 .subscribe-input-group button:hover {
   background-color: #00838f;
   transform: translateY(-2px);
@@ -154,7 +155,7 @@
 .bottom-footer .footer-links {
   margin: 10px 0;
   font-size: 15px;
-  color: #424242;
+  color: #e0f7fa;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -171,7 +172,7 @@
 }
 
 .bottom-footer .footer-links a:hover {
-  color: #00796b;
+  color: #80deea;
 }
 
 .bottom-footer .footer-links a:first-child {
@@ -187,7 +188,7 @@
 .bottom-footer .copyright {
   margin-top: 16px;
   font-size: 14px;
-  color: #616161;
+  color: #b0bec5;
 }
 
 /* Responsive styles */
