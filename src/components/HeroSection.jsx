@@ -1,15 +1,66 @@
 // HeroSection.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import '../styles/HeroSection.css';
 
 function Counter({ target, duration = 2000, suffix = '' }) {
   const [count, setCount] = useState(0);
+  const counterRef = useRef(null);
+  const animationRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
+  const hasAnimated = useRef(false);
   
   useEffect(() => {
+    // Create intersection observer to detect when counter is in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Update state when visibility changes
+        const entry = entries[0];
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3, // Trigger when at least 10% of the element is visible
+        rootMargin: '0px' // No margin around the viewport
+      }
+    );
+    
+    // Start observing the counter element
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+    
+    // Cleanup observer on unmount
+    return () => {
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current);
+      }
+    };
+  }, []);
+  
+  useEffect(() => {
+    // Only start/restart animation when element comes into view
+    if (isInView) {
+      startAnimation();
+    } else {
+      // Cancel any ongoing animation when out of view
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+  }, [isInView]);
+  
+  const startAnimation = () => {
     // Convert target to number and handle non-numeric inputs
     const end = parseInt(target, 10);
     
     if (isNaN(end) || end <= 0) return;
+    
+    // Reset the counter when starting a new animation
+    setCount(0);
+    
+    // Cancel any ongoing animation
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
     
     // Animation timing variables
     const startTime = Date.now();
@@ -29,29 +80,38 @@ function Counter({ target, duration = 2000, suffix = '' }) {
       setCount(currentValue);
       
       if (now < endTime) {
-        requestAnimationFrame(updateCounter);
+        animationRef.current = requestAnimationFrame(updateCounter);
       } else {
         setCount(end); // Ensure we end exactly on target
+        hasAnimated.current = true;
       }
     };
     
     // Start animation
-    requestAnimationFrame(updateCounter);
-    
-    // Cleanup animation on unmount
-    return () => setCount(end);
-  }, [target, duration]);
+    animationRef.current = requestAnimationFrame(updateCounter);
+  };
+  
+  // Cleanup animation on unmount
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
   
   return (
-    <span className="counter-value">
+    <span className="counter-value" ref={counterRef}>
       {count.toLocaleString()}{suffix}
     </span>
   );
 }
 
 function HeroSection() {
+  const heroRef = useRef(null);
+  
   return (
-    <div className="hero-container">
+    <div className="hero-container" ref={heroRef}>
       <div className="hero-content">
         <h2 className="hero-title">Our Fleet & Network</h2>
         <p className="hero-subtitle">
