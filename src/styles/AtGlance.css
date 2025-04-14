@@ -1,0 +1,203 @@
+/* src/styles/AtGlance.css */
+.at-glance-container {
+    display: flex;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .content-area {
+    flex: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .page-title {
+    color: #0066cc;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .section {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+  .section:nth-child(7) { animation-delay: 0.6s; }
+  .section:nth-child(8) { animation-delay: 0.7s; }
+  .section:nth-child(9) { animation-delay: 0.8s; }
+  
+  .section-heading {
+    color: #003366;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  
+  .section-heading::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    background-color: #0066cc;
+    margin-right: 12px;
+    border-radius: 4px;
+  }
+  
+  .sub-heading {
+    color: #003366;
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+    font-weight: 500;
+  }
+  
+  .section p {
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .info-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .info-list li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  
+  .info-list li::before {
+    content: '•';
+    color: #0066cc;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5rem;
+    position: absolute;
+    left: 0;
+  }
+  
+  .fast-facts-image {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .fast-facts-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .highlight-box {
+    background-color: #f0f7ff;
+    border-left: 4px solid #0066cc;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin: 1.5rem 0;
+  }
+  
+  .visuals-gallery {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  
+  .visual-item {
+    width: 32%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .visual-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .visual-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .stat-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .at-glance-container {
+      flex-direction: column;
+    }
+    
+    .content-area {
+      padding: 1.5rem;
+    }
+    
+    .visuals-gallery {
+      flex-direction: column;
+    }
+    
+    .visual-item {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
