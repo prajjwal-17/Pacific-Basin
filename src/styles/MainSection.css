@@ -1,0 +1,168 @@
+/* Main container style */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+    flex-direction: row; /* Ensure row direction for larger screens */
+}
+
+/* Card style */
+.card {
+    width: 300px; /* Increased width for larger cards */
+    height: 350px; /* Increased height for larger cards */
+    overflow: hidden; /* Prevent content overflow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px; /* Optional: Add border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow */
+    background-color: #fff;
+    padding: 10px;
+    position: relative;
+    opacity: 0; /* Initially hidden for fade-in animation */
+    transform: translateY(30px); /* Initially moved slightly down for slide-in effect */
+    animation: fadeIn 0.6s ease-out forwards, slideIn 0.6s ease-out forwards; /* Apply animations */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-10px); /* Move up a bit on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Image inside the card */
+.card img {
+    width: 100%; /* Ensure image fills the container */
+    height: 200px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Crop image if necessary */
+}
+
+/* Hero section style (if you have a hero section, based on previous JSX) */
+.hero-image {
+    width: 100%;
+    height: 600px;
+    background: url('path_to_hero_image') center/cover no-repeat;
+    position: relative;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow {
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Card text styles */
+.card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.card .date {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Optional styling for specific cards */
+.card.contact {
+    background-color: #f9f9f9;
+}
+
+.card.news {
+    background-color: #f0f7fc;
+}
+
+.card.fraud {
+    background-color: #fff0f0;
+}
+
+.card.profile {
+    background-color: #e7f5ff;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* Fully visible */
+    }
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+    to {
+        transform: translateY(0); /* Move to original position */
+    }
+}
+
+/* Optional: Media query for smaller screens (phones/tablets) */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Stack the cards vertically on smaller screens */
+        align-items: center; /* Center the cards */
+    }
+
+    .card {
+        width: 90%; /* Make cards wider for smaller screens */
+        height: auto; /* Let height adjust based on content */
+    }
+
+    .card img {
+        height: 150px; /* Adjust image height for smaller screens */
+    }
+}
