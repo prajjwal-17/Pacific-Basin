@@ -1,5 +1,5 @@
 .bottom-footer {
-  background: linear-gradient(135deg, #1a2b3c, #2c3e50); 
+  background: linear-gradient(135deg, #1a2b3c, #2c3e50);
   padding: 60px 20px 40px;
   font-family: Arial, sans-serif;
   border-top: 2px solid #81d4fa;
@@ -25,14 +25,17 @@
   transform: translateY(0);
 }
 
-/* Logo */
+/* Logo - Reduced size */
 .bottom-footer .logo {
-  width: 140px;
+  width: 100px;
+  max-height: 100px;
+  object-fit: contain;
   margin: 0 auto 30px auto;
   display: block;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
 }
+
 
 .bottom-footer .logo:hover {
   transform: scale(1.05);
@@ -79,7 +82,6 @@
   background-color: #0f1f33;
   color: #e0f7fa;
 }
-
 
 .subscribe-input-group input:focus {
   border-color: #00acc1;
@@ -196,13 +198,13 @@
   .bottom-footer {
     padding: 40px 16px 30px;
   }
-  
+
   .bottom-footer .subscribe-box {
     padding: 20px;
   }
-  
+
   .bottom-footer .logo {
-    width: 120px;
+    width: 100px; /* Reduced to 100px from 120px in this media query */
     margin-bottom: 20px;
   }
 }
@@ -218,7 +220,7 @@
     width: 100%;
     text-align: center;
   }
-  
+
   .bottom-footer .footer-links {
     flex-direction: column;
     gap: 12px;
@@ -231,15 +233,15 @@
     padding: 8px 0;
     width: 100%;
   }
-  
+
   .bottom-footer .footer-links a:last-child {
     border-bottom: none;
   }
-  
+
   .bottom-footer .subscribe-icons {
     gap: 12px;
   }
-  
+
   .bottom-footer .subscribe-icons a {
     width: 36px;
     height: 36px;
