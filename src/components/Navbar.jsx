@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
 
-
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Images for each dropdown section
   const sectionImages = {
     'ABOUT US': '/images/about-us.jpg',
     'OUR SERVICE': '/images/our-service.jpg',
@@ -69,19 +67,13 @@ const Navbar = () => {
     },
   ];
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
-    
-    // Set loaded state after a short delay to trigger animations
+
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 100);
@@ -92,41 +84,23 @@ const Navbar = () => {
     };
   }, []);
 
-  // Handle mouseenter for dropdowns
-  const handleMouseEnter = (index) => {
-    setActiveDropdown(index);
-  };
-
-  // Handle mouseleave for dropdowns
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
-
-  // Toggle mobile menu
+  const handleMouseEnter = (index) => setActiveDropdown(index);
+  const handleMouseLeave = () => setActiveDropdown(null);
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Reset active dropdown when toggling mobile menu
-    if (!isMobileMenuOpen) {
-      setActiveDropdown(null);
-    }
+    if (!isMobileMenuOpen) setActiveDropdown(null);
   };
 
-  // Toggle dropdown for mobile
-  const toggleDropdown = (index) => {
+  const toggleDropdown = (index) =>
     setActiveDropdown(activeDropdown === index ? null : index);
-  };
 
-  // Split links into two columns
   const splitLinks = (links) => {
     const halfLength = Math.ceil(links.length / 2);
-    const firstColumn = links.slice(0, halfLength);
-    const secondColumn = links.slice(halfLength);
-    return [firstColumn, secondColumn];
+    return [links.slice(0, halfLength), links.slice(halfLength)];
   };
 
   return (
     <header className={`fixed-header ${scrolled ? 'scrolled' : ''} ${loaded ? 'loaded' : ''}`}>
-      {/* Top bar with integrated elements that will merge with navbar */}
       <div className={`top-bar ${scrolled ? 'top-bar-collapsed' : ''}`}>
         <div className="container">
           <div className="contacts-language">
@@ -146,18 +120,14 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Main navbar */}
       <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
         <div className="container">
-          {/* Logo */}
           <a href="/" className="navbar-logo animate-item">
             <div className="logo-container">
               <img src="/logo.png" alt="Pacific Basin" className={scrolled ? 'logo-scrolled' : ''} />
-    
             </div>
           </a>
 
-          {/* Integrated top bar elements that appear when scrolled */}
           <div className={`integrated-topbar ${scrolled ? 'show-integrated' : ''}`}>
             <a href="#" className="integrated-link">CONTACTS</a>
             <div className="integrated-language">
@@ -170,7 +140,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Desktop menu */}
           <div className={`navbar-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
             {navItems.map((item, index) => (
               <div 
@@ -183,8 +152,7 @@ const Navbar = () => {
                   {item.title}
                   <i className="dropdown-icon"></i>
                 </button>
-                
-                {/* Unified dropdown menu with image */}
+
                 {activeDropdown === index && (
                   <div className={`unified-dropdown ${item.title === 'MEDIA' ? 'media-dropdown' : ''}`}>
                     <div className="unified-dropdown-content">
@@ -194,17 +162,21 @@ const Navbar = () => {
                         <div className="dropdown-links-container">
                           {splitLinks(item.links).map((columnLinks, colIndex) => (
                             <div key={colIndex} className="dropdown-column">
-                               {columnLinks.map((link, idx) =>
-                                link === 'At a glance' ? (
-                                  <Link key={idx} to="/atglance" className="unified-dropdown-link">
-                                   {link}
+                              {columnLinks.map((link, idx) =>
+                                link === 'At a glance' || link === 'Our history' ? (
+                                  <Link
+                                    key={idx}
+                                    to={link === 'At a glance' ? '/atglance' : '/ourhistory'}
+                                    className="unified-dropdown-link"
+                                  >
+                                    {link}
                                   </Link>
                                 ) : (
-                                    <a key={idx} href="#" className="unified-dropdown-link">
-                                 {link}
+                                  <a key={idx} href="#" className="unified-dropdown-link">
+                                    {link}
                                   </a>
-                                     ))}
-
+                                )
+                              )}
                             </div>
                           ))}
                         </div>
@@ -220,14 +192,12 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <button className="mobile-toggle animate-item" onClick={toggleMobileMenu} aria-label="Toggle Navigation">
             <span className={`menu-icon ${isMobileMenuOpen ? 'open' : ''}`}></span>
           </button>
         </div>
       </nav>
 
-      {/* Mobile dropdown menus */}
       <div className={`mobile-dropdowns ${isMobileMenuOpen ? 'show' : ''}`}>
         {navItems.map((item, index) => (
           <div key={index} className="mobile-dropdown">
@@ -247,17 +217,22 @@ const Navbar = () => {
                     <div className="mobile-links-container">
                       {splitLinks(item.links).map((columnLinks, colIndex) => (
                         <div key={colIndex} className="mobile-column">
-                              {columnLinks.map((link, idx) =>
-                           link === 'At a glance' ? (
-                          <Link key={idx} to="/atglance" className="mobile-dropdown-link" onClick={() => setIsMobileMenuOpen(false)}>
-                          {link}
-                          </Link>
-                          ) : (
-                         <a key={idx} href="#" className="mobile-dropdown-link">
-                          {link}
-                          </a>
-                         ))}
-
+                          {columnLinks.map((link, idx) =>
+                            link === 'At a glance' || link === 'Our history' ? (
+                              <Link
+                                key={idx}
+                                to={link === 'At a glance' ? '/atglance' : '/ourhistory'}
+                                className="mobile-dropdown-link"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {link}
+                              </Link>
+                            ) : (
+                              <a key={idx} href="#" className="mobile-dropdown-link">
+                                {link}
+                              </a>
+                            )
+                          )}
                         </div>
                       ))}
                     </div>
@@ -276,5 +251,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

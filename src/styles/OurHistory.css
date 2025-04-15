@@ -1,0 +1,183 @@
+/* Outer page container */
+.history-container {
+    padding: 60px 20px;
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* Title */
+  .history-title {
+    display: flex;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 300;
+    color: #003366;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 60px;
+  }
+  
+  /* Blue box beside title */
+  .history-title::before {
+    content: '';
+    width: 6px;
+    height: 35px;
+    background-color: #0077b6;
+    margin-right: 15px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  
+  /* Main white box wrapping the timeline */
+  .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Central vertical line */
+  .timeline-line {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: #0077b6;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  
+  /* Each item */
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: fadeIn ease 1s forwards;
+  }
+  
+  /* Left and right placement */
+  .timeline-item.left {
+    left: 0;
+    text-align: left;
+    animation-name: fadeInLeft;
+  }
+  
+  .timeline-item.right {
+    left: 50%;
+    text-align: left;
+    animation-name: fadeInRight;
+  }
+  
+  /* Dot marker */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #0077b6;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .timeline-item.left::before {
+    right: -10px;
+  }
+  
+  .timeline-item.right::before {
+    left: -10px;
+  }
+  
+  /* Content box - styled based on side */
+  .timeline-content {
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-item.left .timeline-content {
+    background-color: #f0f0f0;
+  }
+  
+  .timeline-item.right .timeline-content {
+    background-color: #e0f4ff;
+  }
+  
+  /* Section title in each timeline block */
+  .timeline-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #003366;
+    font-weight: 600;
+  }
+  
+  /* Remove bullet points and adjust list items */
+  .timeline-content ul {
+    list-style-type: none;  /* Remove bullet points */
+    padding-left: 0;        /* Remove padding */
+    margin: 0;              /* Remove margin */
+  }
+  
+  .timeline-content li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .timeline-content li strong {
+    color: #003366;
+  }
+  
+  /* Animations */
+  @keyframes fadeInLeft {
+    from {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media screen and (max-width: 768px) {
+    .timeline-item {
+      width: 100%;
+      left: 0 !important;
+      text-align: left;
+      padding-left: 40px;
+      animation-name: fadeInRight;
+    }
+  
+    .timeline-item::before {
+      left: 10px !important;
+      right: auto;
+    }
+  
+    .timeline-line {
+      left: 20px;
+    }
+  }
+  

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import BottomBar from './components/BottomBar';
 import Home from './pages/Home';
 import AtGlance from './pages/AtGlance'; // <-- Make sure this file exists
+import OurHistory from './pages/OurHistory';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/atglance" element={<AtGlance />} />
+            <Route path="/ourhistory" element={<OurHistory />} />
           </Routes>
         </main>
         <BottomBar />
