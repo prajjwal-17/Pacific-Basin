@@ -113,6 +113,12 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          
+          {/* Added Pacific Basin title in center */}
+          <div className="company-title">
+            <h1 className="top-title top-link-animate">PACIFIC BASIN</h1>
+          </div>
+          
           <div className="stock-info">
             <span className="stock-price top-link-animate">1.630 HKD</span>
             <span className="stock-change top-link-animate">+0.050 (3.16%)</span>

@@ -1,183 +1,459 @@
-/* Outer page container */
+/* Outer page container */ 
 .history-container {
-    padding: 60px 20px;
-    background-color: #f5f7fa;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-  }
-  
-  /* Title */
-  .history-title {
-    display: flex;
-    align-items: center;
-    font-size: 3rem;
-    font-weight: 300;
-    color: #003366;
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 60px;
-  }
-  
-  /* Blue box beside title */
-  .history-title::before {
-    content: '';
-    width: 6px;
-    height: 35px;
-    background-color: #0077b6;
-    margin-right: 15px;
-    border-radius: 3px;
-    display: inline-block;
-  }
-  
-  /* Main white box wrapping the timeline */
-  .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 40px 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Central vertical line */
-  .timeline-line {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 4px;
-    background-color: #0077b6;
-    transform: translateX(-50%);
-    z-index: 0;
-  }
-  
-  /* Each item */
-  .timeline-item {
-    position: relative;
-    width: 50%;
-    padding: 20px 30px;
-    box-sizing: border-box;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #e0f7ff 0%, #f5f7fa 100%);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ocean wave effect in background */
+.ocean-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(0, 119, 182, 0.2) 0%, rgba(245, 247, 250, 0) 100%);
+  z-index: 0;
+}
+
+/* Title styling */
+.history-title {
+  display: flex;
+  align-items: center;
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: #003366;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0, 119, 182, 0.1);
+}
+
+/* Blue box beside title with wave effect */
+.history-title::before {
+  content: '';
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(to bottom, #00a7e1, #003366);
+  margin-right: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 119, 182, 0.3);
+}
+
+/* Main container wrapping the timeline */
+.timeline {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 60px 30px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 51, 102, 0.12);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+/* Central vertical line */
+.timeline-line {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  background: linear-gradient(to bottom, #003366, #0077b6, #00a7e1);
+  transform: translateX(-50%);
+  z-index: 1;
+  border-radius: 3px;
+  box-shadow: 0 0 15px rgba(0, 119, 182, 0.3);
+}
+
+/* Year markers container */
+.year-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Individual year marker */
+.year-marker {
+  position: absolute;
+  width: 100px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Year marker positioning */
+.year-marker.left {
+  left: calc(50% - 140px);
+  text-align: right;
+}
+
+.year-marker.right {
+  left: calc(50% + 40px);
+  text-align: left;
+}
+
+/* Year marker text */
+.year-marker span {
+  background: linear-gradient(135deg, #003366, #0077b6);
+  color: white;
+  padding: 3px 12px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 51, 102, 0.2);
+  position: relative;
+}
+
+/* Connecting line from marker to timeline */
+.year-marker.left span::after,
+.year-marker.right span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background-color: #0077b6;
+}
+
+.year-marker.left span::after {
+  right: -30px;
+}
+
+.year-marker.right span::before {
+  left: -30px;
+}
+
+/* Timeline items */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 25px 40px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition-duration: 0.8s;
+}
+
+/* Left timeline items */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+  padding-right: 60px;
+  transform: translateX(-50px);
+}
+
+/* Animation for left items */
+.timeline-item.left.visible {
+  animation: slideInLeft 0.8s ease forwards;
+}
+
+/* Right timeline items */
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+  padding-left: 60px;
+  transform: translateX(50px);
+}
+
+/* Animation for right items */
+.timeline-item.right.visible {
+  animation: slideInRight 0.8s ease forwards;
+}
+
+/* Timeline dot markers */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #00a7e1, #003366);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Position the markers */
+.timeline-item.left::before {
+  right: -16px;
+}
+
+.timeline-item.right::before {
+  left: -16px;
+}
+
+/* Hover effect for timeline markers */
+.timeline-item:hover::before {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(0, 119, 182, 0.4);
+}
+
+/* Content box styling */
+.timeline-content {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Left content styling */
+.timeline-item.left .timeline-content {
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f8ff 100%);
+  border-left: 5px solid #0077b6;
+  text-align: left;
+}
+
+/* Right content styling */
+.timeline-item.right .timeline-content {
+  background: linear-gradient(135deg, #e0f0ff 0%, #f0f7ff 100%);
+  border-right: 5px solid #0077b6;
+}
+
+/* Water-like hover effect */
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 51, 102, 0.2);
+}
+
+/* Content box after element for wave effect */
+.timeline-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #003366, #0077b6, #00a7e1);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover::after {
+  opacity: 1;
+}
+
+/* Image styling */
+.timeline-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 15px;
+  transition: all 0.5s ease;
+  filter: saturate(1.2);
+}
+
+.timeline-content:hover .timeline-image {
+  transform: scale(1.05);
+  filter: saturate(1.4);
+}
+
+/* Section title styling */
+.timeline-content h3 {
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+  color: #003366;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+/* Decorative underline for section titles */
+.timeline-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0077b6, #00a7e1);
+  border-radius: 2px;
+}
+
+/* List styling */
+.timeline-content ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.timeline-content li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  position: relative;
+  padding-left: 25px;
+}
+
+/* Custom ship anchor bullet points */
+.timeline-content li::before {
+  content: '⚓';
+  position: absolute;
+  left: 0;
+  color: #0077b6;
+  font-size: 0.8rem;
+}
+
+/* Year styling */
+.timeline-content li strong {
+  color: #003366;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: inline-block;
+  margin-bottom: 5px;
+  background: linear-gradient(90deg, #003366, #0077b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
     opacity: 0;
-    animation: fadeIn ease 1s forwards;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Wave animation at the bottom */
+.wave-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%230077b6"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%230077b6"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%230077b6"/></svg>');
+  background-size: 1200px 80px;
+  background-repeat: repeat-x;
+  animation: wave 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes wave {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1200px;
+  }
+}
+
+/* Responsive styling */
+@media screen and (max-width: 992px) {
+  .history-title {
+    font-size: 2.5rem;
   }
   
-  /* Left and right placement */
-  .timeline-item.left {
-    left: 0;
-    text-align: left;
-    animation-name: fadeInLeft;
+  .timeline {
+    padding: 40px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .history-container {
+    padding: 60px 15px;
   }
   
-  .timeline-item.right {
-    left: 50%;
-    text-align: left;
-    animation-name: fadeInRight;
+  .history-title {
+    font-size: 2rem;
+    margin-bottom: 50px;
   }
   
-  /* Dot marker */
+  .timeline-line {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 60px !important;
+    padding-right: 20px !important;
+    text-align: left !important;
+    margin-bottom: 30px;
+  }
+  
   .timeline-item::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    background-color: #0077b6;
-    border: 4px solid #fff;
-    border-radius: 50%;
-    z-index: 1;
+    left: 27px !important;
+    right: auto !important;
   }
   
-  .timeline-item.left::before {
-    right: -10px;
+  .timeline-item.left {
+    transform: translateX(50px);
   }
   
-  .timeline-item.right::before {
-    left: -10px;
+  .timeline-item.left.visible,
+  .timeline-item.right.visible {
+    animation: slideInRight 0.8s ease forwards;
   }
   
-  /* Content box - styled based on side */
+  .year-marker {
+    display: none; /* Hide year markers on mobile */
+  }
+  
   .timeline-content {
-    padding: 25px 30px;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
+    padding: 20px;
   }
   
-  .timeline-item.left .timeline-content {
-    background-color: #f0f0f0;
-  }
-  
-  .timeline-item.right .timeline-content {
-    background-color: #e0f4ff;
-  }
-  
-  /* Section title in each timeline block */
   .timeline-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #003366;
-    font-weight: 600;
+    font-size: 1.4rem;
   }
   
-  /* Remove bullet points and adjust list items */
-  .timeline-content ul {
-    list-style-type: none;  /* Remove bullet points */
-    padding-left: 0;        /* Remove padding */
-    margin: 0;              /* Remove margin */
+  .wave-footer {
+    height: 40px;
+    background-size: 600px 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .history-title {
+    font-size: 1.8rem;
+  }
+  
+  .timeline {
+    padding: 30px 15px;
+  }
+  
+  .timeline-item {
+    padding-left: 50px !important;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1.2rem;
   }
   
   .timeline-content li {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333;
+    font-size: 0.9rem;
   }
-  
-  .timeline-content li strong {
-    color: #003366;
-  }
-  
-  /* Animations */
-  @keyframes fadeInLeft {
-    from {
-      transform: translateX(-50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes fadeInRight {
-    from {
-      transform: translateX(50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Mobile responsiveness */
-  @media screen and (max-width: 768px) {
-    .timeline-item {
-      width: 100%;
-      left: 0 !important;
-      text-align: left;
-      padding-left: 40px;
-      animation-name: fadeInRight;
-    }
-  
-    .timeline-item::before {
-      left: 10px !important;
-      right: auto;
-    }
-  
-    .timeline-line {
-      left: 20px;
-    }
-  }
-  
+}

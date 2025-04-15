@@ -50,7 +50,7 @@ function BottomBar() {
           </div>
 
           <div className="copyright">
-            &copy; 2025 Pacific Basin Shipping Limited
+            &copy; 2019 Pacific Basin Shipping Limited
           </div>
         </div>
       </div>
