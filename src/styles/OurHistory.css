@@ -18,10 +18,11 @@
   z-index: 0;
 }
 
-/* Title styling */
+/* Title styling - UPDATED to center */
 .history-title {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the title */
   font-size: 3.2rem;
   font-weight: 500;
   color: #003366;
@@ -30,6 +31,7 @@
   position: relative;
   z-index: 1;
   text-shadow: 2px 2px 4px rgba(0, 119, 182, 0.1);
+  text-align: center; /* Ensure text is centered */
 }
 
 /* Blue box beside title with wave effect */
@@ -42,6 +44,69 @@
   border-radius: 4px;
   display: inline-block;
   box-shadow: 0 4px 8px rgba(0, 119, 182, 0.3);
+}
+
+/* NEW: Next section navigation button */
+.next-section-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 180px;
+  height: 50px;
+  background: linear-gradient(135deg, #003366, #0077b6);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 51, 102, 0.25);
+  z-index: 100;
+  transition: all 0.3s ease;
+  padding: 0 20px;
+}
+
+.next-section-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(0, 51, 102, 0.3);
+  background: linear-gradient(135deg, #00487a, #0088cc);
+}
+
+.next-section-button:active {
+  transform: translateY(-1px);
+}
+
+.next-section-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  background: #6c757d;
+}
+
+.next-button-text {
+  margin-right: 8px;
+}
+
+.next-button-icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  animation: bounceDown 2s infinite;
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
 }
 
 /* Main container wrapping the timeline */
@@ -143,7 +208,7 @@
   margin-bottom: 40px;
   box-sizing: border-box;
   opacity: 0;
-  transition-duration: 0.8s;
+  /* Remove initial transform for animation reset functionality */
 }
 
 /* Left timeline items */
@@ -151,7 +216,6 @@
   left: 0;
   text-align: right;
   padding-right: 60px;
-  transform: translateX(-50px);
 }
 
 /* Animation for left items */
@@ -164,7 +228,6 @@
   left: 50%;
   text-align: left;
   padding-left: 60px;
-  transform: translateX(50px);
 }
 
 /* Animation for right items */
@@ -379,6 +442,13 @@
   .timeline {
     padding: 40px 20px;
   }
+  
+  .next-section-button {
+    right: 20px;
+    width: 160px;
+    height: 45px;
+    font-size: 0.9rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -434,6 +504,14 @@
     height: 40px;
     background-size: 600px 40px;
   }
+  
+  .next-section-button {
+    bottom: 20px;
+    right: 20px;
+    width: 140px;
+    height: 40px;
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -455,5 +533,16 @@
   
   .timeline-content li {
     font-size: 0.9rem;
+  }
+  
+  .next-section-button {
+    width: 120px;
+    font-size: 0.75rem;
+    padding: 0 12px;
+  }
+  
+  .next-button-icon {
+    width: 16px;
+    height: 16px;
   }
 }

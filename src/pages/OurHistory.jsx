@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/OurHistory.css';
 import img2 from "../Images/MainSectionimgs/img2.jpg"; // Updated image for history section
 
 function OurHistory() {
   const timelineRef = useRef(null);
+  const [currentSection, setCurrentSection] = useState(0);
   
   const timelineData = [
     {
@@ -243,7 +244,6 @@ function OurHistory() {
     }
   ];
   
-
   // Extract first year from each timeline section to add as data attribute
   const getFirstYear = (yearDetails) => {
     if (yearDetails && yearDetails.length > 0) {
@@ -252,43 +252,132 @@ function OurHistory() {
     return '';
   };
 
+  // *** FIX 1: Completely rewritten scroll function with fixed navbar offset ***
+  const scrollToNextSection = () => {
+    // Always calculate the next section index, regardless of current section
+    const nextSectionIndex = currentSection + 1;
+    
+    // Make sure we don't go beyond the total number of sections
+    if (nextSectionIndex < timelineData.length) {
+      // Get all timeline items first
+      const allTimelineItems = document.querySelectorAll('.timeline-item');
+      
+      // If the next section exists in the DOM
+      if (allTimelineItems[nextSectionIndex]) {
+        // Fixed offset value - adjust this based on your navbar height
+        const NAVBAR_HEIGHT = 120; // Increased to ensure enough space
+        
+        // Get the element's position relative to the viewport
+        const sectionElement = allTimelineItems[nextSectionIndex];
+        const sectionTop = sectionElement.getBoundingClientRect().top;
+        
+        // Current scroll position + section's top position - navbar offset
+        const scrollToPosition = window.pageYOffset + sectionTop - NAVBAR_HEIGHT;
+        
+        // Perform the scroll with smooth behavior
+        window.scrollTo({
+          top: scrollToPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update current section state
+        setCurrentSection(nextSectionIndex);
+      }
+    }
+  };
+
+  // *** FIX 2: Modified intersection observer to better handle scroll positions ***
   useEffect(() => {
-    // Animation observer setup
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.3,
-    };
-  
-    const handleIntersection = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    };
-  
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-  
+    // First, set data attributes for all timeline items
     const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+      item.setAttribute('data-index', index);
+    });
+    
+    // Configure observer with better settings for visibility
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          // Only update when section is entering viewport
+          if (entry.isIntersecting) {
+            const sectionIndex = parseInt(entry.target.getAttribute('data-index'));
+            
+            // Add visible class for animation
+            entry.target.classList.add('visible');
+            
+            // Update current section state
+            setCurrentSection(sectionIndex);
+          } else {
+            // Remove visible class when out of viewport
+            entry.target.classList.remove('visible');
+          }
+        });
+      },
+      {
+        root: null, // Use viewport as root
+        rootMargin: '-20% 0px -20% 0px', // Trigger when element is 20% into viewport
+        threshold: 0.15 // Trigger when 15% of element is visible
+      }
+    );
+    
+    // Observe all timeline items
     timelineItems.forEach(item => {
       observer.observe(item);
     });
-  
+    
+    // Clean up observer on component unmount
     return () => {
       timelineItems.forEach(item => {
         observer.unobserve(item);
       });
     };
   }, []);
-  
 
- return (
+  // *** FIX 3: Add initial scroll adjustment when page loads ***
+  useEffect(() => {
+    // Apply initial offset adjustment if needed
+    const adjustInitialPosition = () => {
+      // Fixed navbar height
+      const NAVBAR_HEIGHT = 120;
+      
+      // Check if there's a hash in URL (direct link to section)
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        
+        if (element) {
+          // Wait a moment for DOM to render
+          setTimeout(() => {
+            const scrollPosition = element.offsetTop - NAVBAR_HEIGHT;
+            window.scrollTo(0, scrollPosition);
+          }, 100);
+        }
+      }
+    };
+    
+    // Run adjustment on component mount
+    adjustInitialPosition();
+  }, []);
+
+  return (
     <div className="history-container" ref={timelineRef}>
       {/* Ocean background decoration */}
       <div className="ocean-background"></div>
       
       <h2 className="history-title">Our Maritime Journey</h2>
+      
+      {/* Next section navigation button - FIXED to properly handle all sections */}
+      <button 
+        className="next-section-button" 
+        onClick={scrollToNextSection}
+        aria-label="Scroll to next section"
+        style={{ display: currentSection >= timelineData.length - 1 ? 'none' : 'flex' }}
+      >
+        <span className="next-button-text">Next Milestone</span>
+        <svg className="next-button-icon" viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z" />
+        </svg>
+      </button>
       
       <div className="timeline">
         {timelineData.map((item, index) => {
@@ -299,6 +388,8 @@ function OurHistory() {
               key={index} 
               className={`timeline-item ${item.side}`}
               data-year={firstYear}
+              data-index={index}
+              id={`timeline-section-${index}`}
             >
               <div className="timeline-content">
                 <img src={img2} alt="Maritime History" className="timeline-image" />

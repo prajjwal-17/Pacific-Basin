@@ -55,7 +55,7 @@ const SidebarGlance = () => {
     { 
       id: 'history', 
       label: 'Our History', 
-      path: '/atglance/history',
+      path: '/ourhistory',
       icon: <Clock size={18} />
     },
     { 
@@ -101,11 +101,12 @@ const SidebarGlance = () => {
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => setIsExpanded(false)}
       >
+        {/* Home icon for collapsed state */}
         {!isExpanded && !isMobileOpen && (
-  <Link to="/" className="collapsed-home-icon" aria-label="Home">
-    <Home size={30} color="#0093c4" />
-  </Link>
-)}
+          <Link to="/" className="collapsed-home-icon" aria-label="Home">
+            <Home size={24} color="#0093c4" />
+          </Link>
+        )}
 
         <div className="sidebar-header">
           <Link to="/" className="home-link">
@@ -162,18 +163,17 @@ const SidebarGlance = () => {
       )}
 
       {/* Arrow hint when sidebar is collapsed */}
-{!isExpanded && !isMobileOpen && (
-  <div 
-    className="sidebar-arrow-hint" 
-    onClick={() => setIsExpanded(true)}
-    title="Expand Sidebar"
-  >
-    <ChevronRight size={24} color="aqua" />
-  </div>
-)}
-
+      {!isExpanded && !isMobileOpen && (
+        <div 
+          className="sidebar-arrow-hint" 
+          onClick={() => setIsExpanded(true)}
+          title="Expand Sidebar"
+        >
+          <ChevronRight size={24} color="white" />
+        </div>
+      )}
     </>
-  );}
+  );
+};
   
-
 export default SidebarGlance;

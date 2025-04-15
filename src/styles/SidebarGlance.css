@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.5rem;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-secondary);
@@ -141,7 +141,17 @@
   align-items: center;
   justify-content: center;
   color: var(--primary-color);
-  opacity: 0.8;
+  opacity: 1; /* Always show icons */
+  min-width: 24px; /* Ensure icon has minimum width even in collapsed state */
+}
+
+.collapsed .nav-link {
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+
+.collapsed .icon-wrapper {
+  margin: 0 auto;
 }
 
 .nav-link:hover {
@@ -395,7 +405,7 @@
 }
 
 .collapsed-home-icon:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-bg);
   border-radius: 8px;
 }
 
@@ -403,7 +413,7 @@
   position: fixed;
   bottom: 20px;
   left: 10px;
-  background-color:#0093c4;
+  background-color: var(--primary-color);
   border-radius: 50%;
   padding: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -414,6 +424,5 @@
 
 .sidebar-arrow-hint:hover {
   transform: scale(1.1);
-  background-color: #e3e0fa;
+  background-color: var(--primary-hover);
 }
-
