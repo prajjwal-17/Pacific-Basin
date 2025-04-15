@@ -1,0 +1,154 @@
+.strategic-model-container {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .strategic-model-title {
+    font-size: 2.5rem;
+    color: #003366;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .strategic-model-description {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    text-align: center;
+    max-width: 800px;
+  }
+  
+  .model-diagram {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 80px; /* Increased gap */
+  }
+  
+  .circle-container {
+    position: relative;
+    width: 1100px; /* Increased width of the container */
+    height: 1100px; /* Increased height of the container */
+  }
+  
+  .circle {
+    position: absolute;
+    width: 450px;  /* Further increased circle size */
+    height: 450px; /* Further increased circle size */
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid #0077b6; /* Slightly thicker border */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .circle-content {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circle.customer-focus {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .circle.global-network {
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .circle.versatile-fleet {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .circle.corporate-profile {
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .circle-title {
+    font-size: 1.6rem; /* Slightly larger title for better visibility */
+    color: #003366;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .circle-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    text-align: left;
+    margin: 0;
+  }
+  
+  .circle-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .circle-container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .circle {
+      position: relative;
+      width: 90%; /* Adjusted for smaller screens */
+      height: auto;
+      border-radius: 30px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+  
+    .circle-content {
+      height: auto;
+      overflow: visible;
+    }
+  
+    .circle.customer-focus,
+    .circle.global-network,
+    .circle.versatile-fleet,
+    .circle.corporate-profile {
+      top: auto;
+      left: auto;
+      transform: none;
+    }
+  
+    .strategic-model-title {
+      font-size: 2rem;
+    }
+  
+    .strategic-model-description {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+  }
+  

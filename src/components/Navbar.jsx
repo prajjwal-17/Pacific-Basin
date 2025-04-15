@@ -168,21 +168,22 @@ const Navbar = () => {
                         <div className="dropdown-links-container">
                           {splitLinks(item.links).map((columnLinks, colIndex) => (
                             <div key={colIndex} className="dropdown-column">
-                              {columnLinks.map((link, idx) =>
-                                link === 'At a glance' || link === 'Our history' ? (
-                                  <Link
-                                    key={idx}
-                                    to={link === 'At a glance' ? '/atglance' : '/ourhistory'}
-                                    className="unified-dropdown-link"
-                                  >
+                              {columnLinks.map((link, idx) => {
+                                let path = null;
+                                if (link === 'At a glance') path = '/atglance';
+                                else if (link === 'Our history') path = '/ourhistory';
+                                else if (link === 'Our strategic framework') path = '/strategicmodel';
+
+                                return path ? (
+                                  <Link key={idx} to={path} className="unified-dropdown-link">
                                     {link}
                                   </Link>
                                 ) : (
                                   <a key={idx} href="#" className="unified-dropdown-link">
                                     {link}
                                   </a>
-                                )
-                              )}
+                                );
+                              })}
                             </div>
                           ))}
                         </div>
@@ -223,11 +224,16 @@ const Navbar = () => {
                     <div className="mobile-links-container">
                       {splitLinks(item.links).map((columnLinks, colIndex) => (
                         <div key={colIndex} className="mobile-column">
-                          {columnLinks.map((link, idx) =>
-                            link === 'At a glance' || link === 'Our history' ? (
+                          {columnLinks.map((link, idx) => {
+                            let path = null;
+                            if (link === 'At a glance') path = '/atglance';
+                            else if (link === 'Our history') path = '/ourhistory';
+                            else if (link === 'Our strategic framework') path = '/strategicmodel';
+
+                            return path ? (
                               <Link
                                 key={idx}
-                                to={link === 'At a glance' ? '/atglance' : '/ourhistory'}
+                                to={path}
                                 className="mobile-dropdown-link"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
@@ -237,8 +243,8 @@ const Navbar = () => {
                               <a key={idx} href="#" className="mobile-dropdown-link">
                                 {link}
                               </a>
-                            )
-                          )}
+                            );
+                          })}
                         </div>
                       ))}
                     </div>
