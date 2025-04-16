@@ -173,6 +173,7 @@ const Navbar = () => {
                                 if (link === 'At a glance') path = '/atglance';
                                 else if (link === 'Our history') path = '/ourhistory';
                                 else if (link === 'Our strategic framework') path = '/strategicmodel';
+                                else if (link === 'Purpose, Vision and Business Principles') path = '/purpose';
 
                                 return path ? (
                                   <Link key={idx} to={path} className="unified-dropdown-link">
@@ -229,6 +230,8 @@ const Navbar = () => {
                             if (link === 'At a glance') path = '/atglance';
                             else if (link === 'Our history') path = '/ourhistory';
                             else if (link === 'Our strategic framework') path = '/strategicmodel';
+                            else if (link === 'Purpose, Vision and Business Principles') path = '/purpose';
+                            
 
                             return path ? (
                               <Link

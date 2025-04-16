@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import AtGlance from './pages/AtGlance'; // <-- Make sure this file exists
 import OurHistory from './pages/OurHistory';
 import StrategicModel from './pages/StrategicModel';
+import Purpose from './pages/Purpose';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/atglance" element={<AtGlance />} />
             <Route path="/ourhistory" element={<OurHistory />} />
             <Route path="/strategicmodel" element={<StrategicModel />} />
+            <Route path="/purpose" element={<Purpose />} />
           </Routes>
         </main>
         <BottomBar />

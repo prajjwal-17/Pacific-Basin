@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/OurHistory.css';
 import img2 from "../Images/MainSectionimgs/img2.jpg"; // Updated image for history section
+import SidebarGlance from '../components/SidebarGlance'; // Import the sidebar component
 
 function OurHistory() {
   const timelineRef = useRef(null);
@@ -360,78 +361,83 @@ function OurHistory() {
   }, []);
 
   return (
-    <div className="history-container" ref={timelineRef}>
-      {/* Ocean background decoration */}
-      <div className="ocean-background"></div>
+    <div className="page-container">
+      {/* Include the sidebar component */}
+      <SidebarGlance />
       
-      <h2 className="history-title">Our Maritime Journey</h2>
-      
-      {/* Next section navigation button - FIXED to properly handle all sections */}
-      <button 
-        className="next-section-button" 
-        onClick={scrollToNextSection}
-        aria-label="Scroll to next section"
-        style={{ display: currentSection >= timelineData.length - 1 ? 'none' : 'flex' }}
-      >
-        <span className="next-button-text">Next Milestone</span>
-        <svg className="next-button-icon" viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5z" />
-        </svg>
-      </button>
-      
-      <div className="timeline">
-        {timelineData.map((item, index) => {
-          const firstYear = getFirstYear(item.yearDetails);
-          
-          return (
-            <div 
-              key={index} 
-              className={`timeline-item ${item.side}`}
-              data-year={firstYear}
-              data-index={index}
-              id={`timeline-section-${index}`}
-            >
-              <div className="timeline-content">
-                <img src={img2} alt="Maritime History" className="timeline-image" />
-                <h3>{item.title}</h3>
-                {item.yearDetails ? (
-                  <ul>
-                    {item.yearDetails.map((entry, i) => (
-                      <li key={i}>
-                        <strong>{entry.year}</strong>
-                        {entry.text.map((line, j) => (
-                          <div key={j}>{line}</div>
-                        ))}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            </div>
-          );
-        })}
+      <div className="history-container" ref={timelineRef}>
+        {/* Ocean background decoration */}
+        <div className="ocean-background"></div>
         
-        {/* Year markers on the timeline */}
-        <div className="year-markers">
+        <h2 className="history-title">Our Maritime Journey</h2>
+        
+        {/* Next section navigation button - FIXED to properly handle all sections */}
+        <button 
+          className="next-section-button" 
+          onClick={scrollToNextSection}
+          aria-label="Scroll to next section"
+          style={{ display: currentSection >= timelineData.length - 1 ? 'none' : 'flex' }}
+        >
+          <span className="next-button-text">Next Milestone</span>
+          <svg className="next-button-icon" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z" />
+          </svg>
+        </button>
+        
+        <div className="timeline">
           {timelineData.map((item, index) => {
             const firstYear = getFirstYear(item.yearDetails);
-            return firstYear ? (
+            
+            return (
               <div 
-                key={`marker-${index}`} 
-                className={`year-marker ${item.side}`}
-                style={{ top: `${(index + 0.5) * 100 / timelineData.length}%` }}
+                key={index} 
+                className={`timeline-item ${item.side}`}
+                data-year={firstYear}
+                data-index={index}
+                id={`timeline-section-${index}`}
               >
-                <span>{firstYear}</span>
+                <div className="timeline-content">
+                  <img src={img2} alt="Maritime History" className="timeline-image" />
+                  <h3>{item.title}</h3>
+                  {item.yearDetails ? (
+                    <ul>
+                      {item.yearDetails.map((entry, i) => (
+                        <li key={i}>
+                          <strong>{entry.year}</strong>
+                          {entry.text.map((line, j) => (
+                            <div key={j}>{line}</div>
+                          ))}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
               </div>
-            ) : null;
+            );
           })}
+          
+          {/* Year markers on the timeline */}
+          <div className="year-markers">
+            {timelineData.map((item, index) => {
+              const firstYear = getFirstYear(item.yearDetails);
+              return firstYear ? (
+                <div 
+                  key={`marker-${index}`} 
+                  className={`year-marker ${item.side}`}
+                  style={{ top: `${(index + 0.5) * 100 / timelineData.length}%` }}
+                >
+                  <span>{firstYear}</span>
+                </div>
+              ) : null;
+            })}
+          </div>
+          
+          {/* Vertical timeline line */}
+          <div className="timeline-line"></div>
+          
+          {/* Wave effect at the bottom */}
+          <div className="wave-footer"></div>
         </div>
-        
-        {/* Vertical timeline line */}
-        <div className="timeline-line"></div>
-        
-        {/* Wave effect at the bottom */}
-        <div className="wave-footer"></div>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const SidebarGlance = () => {
     { 
       id: 'purpose', 
       label: 'Purpose & Vision', 
-      path: '/atglance/purpose',
+      path: '/purpose',
       icon: <Info size={18} />
     },
     { 
@@ -25,7 +25,7 @@ const SidebarGlance = () => {
     { 
       id: 'framework', 
       label: 'Strategic Framework', 
-      path: '/atglance/framework',
+      path: '/strategicmodel',
       icon: <Briefcase size={18} />
     },
     { 
