@@ -104,7 +104,7 @@ const Navbar = () => {
       <div className={`top-bar ${scrolled ? 'top-bar-collapsed' : ''}`}>
         <div className="container">
           <div className="contacts-language">
-            <a href="#" className="top-link top-link-animate">CONTACTS</a>
+            <Link to="/contact" className="top-link top-link-animate">CONTACTS</Link>
             <div className="language-selector">
               <a href="#" className="top-link language top-link-animate">EN</a>
               <div className="language-dropdown">
@@ -135,7 +135,7 @@ const Navbar = () => {
           </a>
 
           <div className={`integrated-topbar ${scrolled ? 'show-integrated' : ''}`}>
-            <a href="#" className="integrated-link">CONTACTS</a>
+            <Link to="/contact" className="integrated-link">CONTACTS</Link>
             <div className="integrated-language">
               <span>EN</span>
               <i className="integrated-dropdown-icon"></i>
