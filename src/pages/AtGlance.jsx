@@ -244,16 +244,21 @@ const AtGlance = () => {
           </section>
 
           <section id="history" className="section">
-            <h2 className="section-heading">Locations</h2>
-            <p>
-              Our corporate headquarters are in Hong Kong, and our global network spans <span className="animate-number" data-value="14" data-format="regular">14</span> offices across <span className="animate-number" data-value="6" data-format="regular">6</span> continents.
-            </p>
-            <div className="map-container">
-              <div className="map-placeholder">
-                <div>Global Office Network Map</div>
-              </div>
-            </div>
-          </section>
+  <h2 className="section-heading">Locations</h2>
+  <p>
+    Our corporate headquarters are in Hong Kong, and our global network spans <span className="animate-number" data-value="14" data-format="regular">14</span> offices across <span className="animate-number" data-value="6" data-format="regular">6</span> continents.
+  </p>
+  <div className="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.527601900434!2d-0.10417002334939794!3d51.52188217181656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b5116a39051%3A0xb9428ed63c9c5085!2s82%20St%20John%20St%2C%20London%20EC1M%204JN%2C%20UK!5e0!3m2!1sen!2sin!4v1744836689553!5m2!1sen!2sin"
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      className="google-map"
+      title="London Office Location"
+    ></iframe>
+  </div>
+</section>
 
           <section id="awards" className="section">
             <h2 className="section-heading">Financial Highlights</h2>

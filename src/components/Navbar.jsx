@@ -114,7 +114,6 @@ const Navbar = () => {
             </div>
           </div>
           
-          {/* Added Pacific Basin title in center */}
           <div className="company-title">
             <h1 className="top-title top-link-animate">PACIFIC BASIN</h1>
           </div>
@@ -133,6 +132,11 @@ const Navbar = () => {
               <img src="/logo.png" alt="Pacific Basin" className={scrolled ? 'logo-scrolled' : ''} />
             </div>
           </a>
+
+          {/* Added mobile company title */}
+          <div className="mobile-company-title">
+            <h1 className="mobile-title">PACIFIC BASIN</h1>
+          </div>
 
           <div className={`integrated-topbar ${scrolled ? 'show-integrated' : ''}`}>
             <Link to="/contact" className="integrated-link">CONTACTS</Link>

@@ -194,7 +194,7 @@
   transform: translateX(3px);
 }
 
-/* NEW: Improved sidebar toggle tab for desktop */
+/* Improved sidebar hover tab for desktop */
 .sidebar-hover-tab {
   position: absolute;
   top: 50%;
@@ -266,7 +266,7 @@
   text-decoration: underline;
 }
 
-/* Toggle buttons */
+/* Single toggle button */
 .sidebar-toggle {
   position: fixed;
   z-index: 1001;
@@ -282,20 +282,12 @@
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.2s ease;
-}
-
-.sidebar-toggle:hover {
-  background-color: var(--primary-hover);
-}
-
-.sidebar-toggle-top {
   top: 1rem;
   left: 1rem;
 }
 
-.sidebar-toggle-bottom {
-  bottom: 1rem;
-  left: 1rem;
+.sidebar-toggle:hover {
+  background-color: var(--primary-hover);
 }
 
 .close-sidebar {
@@ -341,11 +333,7 @@
     transform: translateX(0);
   }
   
-  .sidebar-toggle-top {
-    display: flex;
-  }
-  
-  .sidebar-toggle-bottom {
+  .sidebar-toggle {
     display: flex;
   }
   

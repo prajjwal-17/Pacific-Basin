@@ -941,3 +941,56 @@ header.scrolled .unified-dropdown {
     display: none;
   }
 }
+
+/* Mobile company title styles */
+.mobile-company-title {
+  display: none; /* Hidden by default on desktop */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 1; /* Lower z-index so logo and toggle button remain clickable */
+  pointer-events: none; /* Prevents capturing clicks that should go to elements behind it */
+}
+
+.mobile-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Update navbar container to position relative for absolute positioning of title */
+.navbar .container {
+  position: relative;
+}
+
+/* Mobile responsiveness media queries */
+@media (max-width: 992px) {
+  /* Show mobile title and adjust layout */
+  .mobile-company-title {
+    display: block;
+  }
+  
+  /* Ensure logo and toggle button have higher z-index */
+  .navbar-logo, .mobile-toggle {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Give toggle button proper spacing on the right */
+  .mobile-toggle {
+    margin-left: auto;
+  }
+}
+
+/* For very small screens, adjust font size */
+@media (max-width: 480px) {
+  .mobile-title {
+    font-size: 16px;
+  }
+}

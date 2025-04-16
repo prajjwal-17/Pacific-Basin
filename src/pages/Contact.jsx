@@ -38,16 +38,18 @@ function Contact() {
       </div>
 
       <div className="our-location-box fade-slide fade-delay-3">
-        <h3>Our Location</h3>
-        <div className="map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.527601900434!2d-0.10417002334939794!3d51.52188217181656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b5116a39051%3A0xb9428ed63c9c5085!2s82%20St%20John%20St%2C%20London%20EC1M%204JN%2C%20UK!5e0!3m2!1sen!2sin!4v1744836689553!5m2!1sen!2sin"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
+  <h3>Our Location</h3>
+  <div className="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.527601900434!2d-0.10417002334939794!3d51.52188217181656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b5116a39051%3A0xb9428ed63c9c5085!2s82%20St%20John%20St%2C%20London%20EC1M%204JN%2C%20UK!5e0!3m2!1sen!2sin!4v1744836689553!5m2!1sen!2sin"
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="London Office Location"
+      className="map-iframe"
+    ></iframe>
+  </div>
+</div>
     </div>
   );
 }

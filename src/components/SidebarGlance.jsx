@@ -1,7 +1,7 @@
 // src/components/SidebarGlance.jsx
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
-import { Menu, X, ChevronRight, Home, Info, Award, Clock, Users, Briefcase } from 'lucide-react';
+import { Menu, X, ChevronRight, Home, Info, Award, Clock, Users, Briefcase, Clipboard, Eye } from 'lucide-react';
 import '../styles/SidebarGlance.css';
 
 const SidebarGlance = () => {
@@ -10,6 +10,12 @@ const SidebarGlance = () => {
   const location = useLocation();
 
   const menuItems = [
+    { 
+      id: 'glance', 
+      label: 'At Glance', 
+      path: '/atglance',
+      icon: <Eye size={18} />
+    },
     { 
       id: 'purpose', 
       label: 'Purpose & Vision', 
@@ -77,18 +83,9 @@ const SidebarGlance = () => {
 
   return (
     <>
-      {/* Mobile toggle button - top */}
+      {/* Single mobile toggle button */}
       <button 
-        className="sidebar-toggle sidebar-toggle-top" 
-        onClick={toggleMobileSidebar}
-        aria-label="Toggle sidebar"
-      >
-        {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-      
-      {/* Mobile toggle button - bottom left */}
-      <button 
-        className="sidebar-toggle sidebar-toggle-bottom" 
+        className="sidebar-toggle" 
         onClick={toggleMobileSidebar}
         aria-label="Toggle sidebar"
       >
